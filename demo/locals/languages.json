@@ -1,0 +1,11 @@
+{
+    "es":{
+        "español" : "Bienvenidos al himalaya"
+    },
+    "en":{
+        "english" : "Mr Kennedy, welcome"
+    },
+    "fr": {
+        "francais" : "Bienvenue dans ma composante, vato!"
+    }
+}

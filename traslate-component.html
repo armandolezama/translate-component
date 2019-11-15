@@ -1,0 +1,61 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<script src="../webcomponentsjs/webcomponents-lite.js"></script>
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
+
+<dom-module id="traslate-component">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      
+      paper-dropdown-menu, paper-listbox {
+        width: 250px;
+      }
+      paper-dropdown-menu {
+        height: 200px;
+        margin: auto;
+        display: block;
+      }
+    </style>
+    
+    <paper-dropdown-menu label="- - Languages - -" disabled>
+      <paper-listbox slot="dropdown-content" class="dropdown-content">
+        <paper-item language="Español">Español</paper-item>
+        <paper-item language="English">English</paper-item>
+        <paper-item language="Francés">Francés</paper-item>
+      </paper-listbox>
+    </paper-dropdown-menu>
+
+    
+  </template>
+  <script>
+    /**
+     * `traslate-component`
+     * traslate component feeded with JSON object
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class TraslateComponent extends Polymer.Element {
+      static get is() { return 'traslate-component'; }
+      static get properties() {
+        return {
+          message: {
+            type: String,
+            value: ''
+          },
+          lenguageCode: {
+            type: String,
+            value: ''
+          }
+        };
+        
+      }
+    }
+
+    window.customElements.define(TraslateComponent.is, TraslateComponent);
+  </script>
+</dom-module>
