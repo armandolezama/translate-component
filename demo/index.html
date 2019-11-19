@@ -10,6 +10,8 @@
 
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+    <link rel="import" href="../../paper-toast/paper-toast.html">
     <link rel="import" href="../traslate-component.html">
 
     <custom-style>
@@ -22,8 +24,19 @@
       <h3>Basic traslate-component demo</h3>
       <demo-snippet>
         <template>
-          <traslate-component></traslate-component>
+          <dom-bind id="demo">
+            <template>
+              <traslate-component></traslate-component>
+              <paper-toast id="toast" text="[[message]]"></paper-toast>
+            </template>
+          </dom-bind>
         </template>
+        <script>
+          const demo = document.querySelector('#demo')
+          demo.message = 'hola mundo'
+          const toast = document.querySelector('#toast')
+
+        </script>
       </demo-snippet>
       <script>
         

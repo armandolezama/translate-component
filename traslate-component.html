@@ -1,5 +1,7 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+<link rel="import" href="../neon-animation/web-animations.html">
+<link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-listbox/paper-listbox.html">
 
@@ -20,11 +22,11 @@
       }
     </style>
     
-    <paper-dropdown-menu label="- - Languages - -" disabled>
-      <paper-listbox slot="dropdown-content" class="dropdown-content">
+    <paper-dropdown-menu label="- - Languages - -" no-animations="true">
+      <paper-listbox slot="dropdown-content" class="dropdown-content"  attr-or-property-name="{{language}}">
         <paper-item language="Español">Español</paper-item>
         <paper-item language="English">English</paper-item>
-        <paper-item language="Francés">Francés</paper-item>
+        <paper-item language="Francais">Francais</paper-item>
       </paper-listbox>
     </paper-dropdown-menu>
 
@@ -47,13 +49,20 @@
             type: String,
             value: ''
           },
-          lenguageCode: {
+          languageCode: {
+            type: String,
+            value: ''
+          },
+          language: {
             type: String,
             value: ''
           }
         };
-        
       }
+          useLanguage (){
+            const language = this.shadowRoot.querySelector('paper-listbox')
+            this.language = language.selected
+          }
     }
 
     window.customElements.define(TraslateComponent.is, TraslateComponent);
