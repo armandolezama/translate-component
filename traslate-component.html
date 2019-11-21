@@ -22,8 +22,8 @@
       }
     </style>
     
-    <paper-dropdown-menu label="- - Languages - -" no-animations="true">
-      <paper-listbox slot="dropdown-content" class="dropdown-content"  attr-or-property-name="{{language}}">
+    <paper-dropdown-menu label="- - Languages - -" no-animations="true" disabled="true" on-value-changed="_selectedItemChanged">
+      <paper-listbox slot="dropdown-content" class="dropdown-content">
         <paper-item language="Español">Español</paper-item>
         <paper-item language="English">English</paper-item>
         <paper-item language="Francais">Francais</paper-item>
@@ -45,24 +45,49 @@
       static get is() { return 'traslate-component'; }
       static get properties() {
         return {
-          message: {
-            type: String,
-            value: ''
-          },
-          languageCode: {
-            type: String,
-            value: ''
-          },
-          language: {
-            type: String,
-            value: ''
+          languages: {
+            type: Object,
+            value: {
+              message: {
+                type: String,
+                value: ''
+              },
+              languageCode: {
+                type: String,
+                value: ''
+              },
+              language: {
+                type: String,
+                value: ''
+              }}
           }
+          
         };
       }
-          useLanguage (){
-            const language = this.shadowRoot.querySelector('paper-listbox')
-            this.language = language.selected
-          }
+      useLanguage (){
+        const language = this.shadowRoot.querySelector('paper-listbox')
+        this.language = language.selected
+      }
+
+      _selectedItemChanged(){
+        console.log('Evento disparado')
+        this.dispatchEvent(new CustomEvent('value-has-changed', {detail: {message: 'Mensaje de bienvenida'}}))
+      }
+      
+      enableDropdownMenu() {
+        this.shadowRoot.querySelector('paper-dropdown-menu').disabled = false
+      }
+
+      getData(){
+        fetch('./locals/languages.json')
+        .then(response => response.json())
+        .then(data =>{
+          this.languages.message = data.message
+          this.languages.languageCode = data.languageCode
+          this.languages.language = data.language
+          this.enableDropdownMenu()
+          }).catch(err => console.log(err))
+      }
     }
 
     window.customElements.define(TraslateComponent.is, TraslateComponent);
