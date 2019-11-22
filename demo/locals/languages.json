@@ -1,11 +1,14 @@
 {
-    "es":{
-        "español" : "Bienvenidos al himalaya"
+    "español":{
+        "code": "es",
+        "message" : "Bienvenidos al himalaya"
     },
-    "en":{
-        "english" : "Mr Kennedy, welcome"
+    "english":{
+        "code": "en",
+        "message" : "Mr Kennedy, welcome"
     },
-    "fr": {
-        "francais" : "Bienvenue dans ma composante, vato!"
+    "francais": {
+        "code": "fr",
+        "message" : "Bienvenue dans ma composante, vato!"
     }
 }

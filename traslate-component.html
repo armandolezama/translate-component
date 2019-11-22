@@ -77,9 +77,9 @@
       }
 
       _loadLanguagesCode(data){
-        this.mapOfLanguages.set('english', data.en.english)
-        this.mapOfLanguages.set('español', data.es.español)
-        this.mapOfLanguages.set('francais', data.fr.francais)
+        this.mapOfLanguages.set('english', `${data.english.code} : ${data.english.message}`)
+        this.mapOfLanguages.set('español', `${data.español.code} : ${data.español.message}`)
+        this.mapOfLanguages.set('francais', `${data.francais.code} : ${data.francais.message}`)
           this.enableDropdownMenu()
       }
 
