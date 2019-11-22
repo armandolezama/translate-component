@@ -23,10 +23,10 @@
     </style>
     
     <paper-dropdown-menu label="- - Languages - -" no-animations="true" disabled="true" on-value-changed="_selectedItemChanged">
-      <paper-listbox slot="dropdown-content" class="dropdown-content">
-        <paper-item language="Español">Español</paper-item>
-        <paper-item language="English">English</paper-item>
-        <paper-item language="Francais">Francais</paper-item>
+      <paper-listbox slot="dropdown-content" class="dropdown-content" attr-for-selected="language">
+        <paper-item language="español">Español</paper-item>
+        <paper-item language="english">English</paper-item>
+        <paper-item language="francais">Francais</paper-item>
       </paper-listbox>
     </paper-dropdown-menu>
 
@@ -45,22 +45,17 @@
       static get is() { return 'traslate-component'; }
       static get properties() {
         return {
-          languages: {
-            type: Object,
-            value: {
               message: {
-                type: String,
-                value: ''
-              },
-              languageCode: {
                 type: String,
                 value: ''
               },
               language: {
                 type: String,
                 value: ''
-              }}
-          }
+              },
+              mapOfLanguages: {
+                type: Map,
+                value: new Map()}
           
         };
       }
@@ -70,24 +65,24 @@
       }
 
       _selectedItemChanged(){
-        console.log('Evento disparado')
-        this.dispatchEvent(new CustomEvent('value-has-changed', {detail: {message: 'Mensaje de bienvenida'}}))
+        this.useLanguage()
+        console.log(this.mapOfLanguages.get(this.language))
+        console.log(typeof this.mapOfLanguages.get(this.language))
+        this.message = this.mapOfLanguages.get(this.language) 
+        this.dispatchEvent(new CustomEvent('value-has-changed', {detail: {message: this.message}}))
       }
       
       enableDropdownMenu() {
         this.shadowRoot.querySelector('paper-dropdown-menu').disabled = false
       }
 
-      getData(){
-        fetch('./locals/languages.json')
-        .then(response => response.json())
-        .then(data =>{
-          this.languages.message = data.message
-          this.languages.languageCode = data.languageCode
-          this.languages.language = data.language
+      _loadLanguagesCode(data){
+        this.mapOfLanguages.set('english', data.en.english)
+        this.mapOfLanguages.set('español', data.es.español)
+        this.mapOfLanguages.set('francais', data.fr.francais)
           this.enableDropdownMenu()
-          }).catch(err => console.log(err))
       }
+
     }
 
     window.customElements.define(TraslateComponent.is, TraslateComponent);
